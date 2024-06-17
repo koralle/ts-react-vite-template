@@ -1,0 +1,24 @@
+pre-commit:
+  piped: false
+  commands:
+    1_check:
+      run: pnpm lefthook run check
+
+check:
+  parallel: true
+  commands:
+    typecheck:
+      tags: typescript
+      files: git diff --name-only HEAD
+      run: pnpm run typecheck
+
+    eslint:
+      tags: eslint
+      files: git diff --name-only HEAD
+      run: pnpm eslint {staged_files} --config eslint.config.mjs
+
+    biome-check:
+      tags: biome
+      glob: "src/*.{ts,tsx,js,jsx,json,md,mdx}"
+      files: git diff --name-only HEAD
+      run: pnpm biome check {staged_files}
