@@ -4,5 +4,5 @@
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
   },
-  "include": ["vite.config.mts"]
+  "include": ["vite.config.mts", "eslint.config.mjs"]
 }
