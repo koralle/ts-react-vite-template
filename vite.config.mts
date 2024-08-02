@@ -9,7 +9,7 @@ export default defineConfig({
     globals: true,
     watch: false,
     coverage: {
-      provider: 'v8',
-    },
-  },
+      provider: 'v8'
+    }
+  }
 })

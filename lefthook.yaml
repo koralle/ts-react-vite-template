@@ -1,24 +1,14 @@
 pre-commit:
-  piped: false
+  piped: true
   commands:
-    1_check:
-      run: pnpm lefthook run check
+    format:
+      priority: 1
+      run: |
+        pnpm prettier {staged_files} --write
+      stage_fixed: true
 
-check:
-  parallel: true
-  commands:
-    typecheck:
-      tags: typescript
-      files: git diff --name-only HEAD
-      run: pnpm run typecheck
-
-    eslint:
-      tags: eslint
-      files: git diff --name-only HEAD
-      run: pnpm eslint {staged_files} --config eslint.config.mjs
-
-    biome-check:
-      tags: biome
-      glob: "src/*.{ts,tsx,js,jsx,json,md,mdx}"
-      files: git diff --name-only HEAD
-      run: pnpm biome check {staged_files}
+    lint:
+      priority: 2
+      run: |
+        pnpm eslint {staged_files} --max-warnings 0
+      stage_fixed: true

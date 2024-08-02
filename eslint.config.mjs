@@ -9,7 +9,7 @@ import {
   config as tseslintConfig,
   configs as tseslintConfigs,
   parser as tseslintParser,
-  plugin as tseslintPlugin,
+  plugin as tseslintPlugin
 } from 'typescript-eslint'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'

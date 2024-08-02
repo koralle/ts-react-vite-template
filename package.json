@@ -8,10 +8,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --config eslint.config.mjs",
-    "fmt": "biome format src/* --write",
-    "fmt:check": "biome format src/*",
-    "check": "concurrently 'pnpm run lint' 'pnpm biome check' 'pnpm run fmt:check' 'pnpm run typecheck'",
+    "lint": "eslint . --max-warnings 0 --cache",
+    "fmt": "prettier . --write",
+    "fmt:check": "prettier . --check",
+    "check": "concurrently 'pnpm run typecheck' 'pnpm run lint' 'pnpm run fmt:check'",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -19,7 +19,6 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
     "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.8.0",
     "@testing-library/jest-dom": "^6.4.8",
@@ -30,8 +29,6 @@
     "@types/node": "^22.1.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "concurrently": "^8.2.2",
     "eslint": "^9.8.0",
@@ -46,6 +43,7 @@
     "globals": "^15.9.0",
     "jsdom": "^24.1.1",
     "lefthook": "^1.7.11",
+    "prettier": "^3.3.3",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.0",
     "vite": "^5.3.5",
