@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --config eslint.config.mjs",
+    "lint": "eslint . --max-warnings 0 --cache",
     "fmt": "biome format src/* --write",
     "fmt:check": "biome format src/*",
     "check": "concurrently 'pnpm run lint' 'pnpm biome check' 'pnpm run fmt:check' 'pnpm run typecheck'",
