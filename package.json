@@ -9,9 +9,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --max-warnings 0 --cache",
-    "fmt": "biome format src/* --write",
-    "fmt:check": "biome format src/*",
-    "check": "concurrently 'pnpm run lint' 'pnpm biome check' 'pnpm run fmt:check' 'pnpm run typecheck'",
+    "fmt": "prettier . --write",
+    "fmt:check": "prettier . --check",
+    "check": "concurrently 'pnpm run typecheck' 'pnpm run lint' 'pnpm run fmt:check'",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
