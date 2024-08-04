@@ -6,9 +6,8 @@ on:
       - main
 
 jobs:
-  ci:
+  typecheck:
     runs-on: ubuntu-22.04
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
@@ -16,7 +15,32 @@ jobs:
       - name: Setup
         uses: ./.github/composite-actions/cache-and-install
 
-      - name: CI
-        shell: bash
+      - name: Type Check
         run: |
-          pnpm run check
+          pnpm run typecheck
+
+  format-check:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: Setup
+        uses: ./.github/composite-actions/cache-and-install
+
+      - name: Format Check
+        run: |
+          pnpm run fmt:check
+
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: Setup
+        uses: ./.github/composite-actions/cache-and-install
+
+      - name: Lint
+        run: |
+          pnpm run lint
