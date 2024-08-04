@@ -2,6 +2,7 @@ import eslint from '@eslint/js'
 import pluginImport from 'eslint-plugin-import'
 import pluginReact from 'eslint-plugin-react'
 import pluginReactHooks from 'eslint-plugin-react-hooks'
+import pluginStorybook from "eslint-plugin-storybook"
 import pluginTestingLibrary from 'eslint-plugin-testing-library'
 import pluginVitest from 'eslint-plugin-vitest'
 import globals from 'globals'
@@ -43,7 +44,10 @@ const languageOptionsTSESConfigArray = [
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-        project: resolve(dirname(fileURLToPath(import.meta.url)), './tsconfig.app.json')
+        project: resolve(dirname(fileURLToPath(import.meta.url)), './tsconfig.app.json'),
+        ecmaFeatures: {
+          jsx: true
+        }
       },
       globals: {
         ...globals.es2024,
@@ -61,6 +65,26 @@ const languageOptionsTSESConfigArray = [
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: resolve(dirname(fileURLToPath(import.meta.url)), './tsconfig.node.json')
+      }
+    }
+  },
+  {
+    name: '@ts-react-vite/language-options/storybook',
+    files: [
+      '.storybook/**/*.ts',
+      '.storybook/**/*.tsx',
+      'stories/**/*.stories.ts',
+      'stories/**/*.stories.tsx'
+    ],
+    languageOptions: {
+      parser: tseslintParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: resolve(dirname(fileURLToPath(import.meta.url)), './tsconfig.storybook.json'),
+        ecmaFeatures: {
+          jsx: true
+        }
       }
     }
   }
@@ -210,6 +234,23 @@ const reactHooksTSESLintConfigs = {
 }
 
 /** @type {Pick<TSESLintConfig, 'name' | 'files' | 'plugins' | 'rules'>} */
+const storybookTSESLintConfig = {
+  name: '@ts-react-vite/storybook/base',
+  files: [
+    '.storybook/**/*.ts',
+    '.storybook/**/*.tsx',
+    'stories/**/*.stories.ts',
+    'stories/**/*.stories.tsx'
+  ],
+  plugins: {
+    storybook: pluginStorybook
+  },
+  rules: {
+    ...pluginStorybook.configs.recommended.rules
+  }
+}
+
+/** @type {Pick<TSESLintConfig, 'name' | 'files' | 'plugins' | 'rules'>} */
 const vitestTEESLintConfig = {
   name: '@ts-react-vite/vitest/base',
   files: ['**/*.test.ts', '**/*.test.tsx'],
@@ -260,6 +301,7 @@ export default tseslintConfig(
   importTSESLintConfig,
   reactTEESLintConfig,
   reactHooksTSESLintConfigs,
+  storybookTSESLintConfig,
   vitestTEESLintConfig,
   testingLibraryTSESLintConfig
 )
