@@ -7,7 +7,7 @@ on:
 
 jobs:
   typecheck:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
@@ -20,7 +20,7 @@ jobs:
           pnpm run typecheck
 
   format-check:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
@@ -33,7 +33,7 @@ jobs:
           pnpm run fmt:check
 
   lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
